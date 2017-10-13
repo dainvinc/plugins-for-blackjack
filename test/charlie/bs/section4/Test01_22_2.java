@@ -5,7 +5,7 @@
  */
 package charlie.bs.section4;
 
-import charlie.advisor.BasicStrategy;
+import charlie.advisor.Advisor;
 import charlie.card.Card;
 import charlie.card.Hand;
 import charlie.card.Hid;
@@ -35,7 +35,7 @@ public class Test01_22_2 {
         Card upCard = new Card(2,Card.Suit.HEARTS);
         
         // Construct advisor and test it
-        IAdvisor advisor = new BasicStrategy();
+        IAdvisor advisor = new Advisor();
   
         Play advice = advisor.advise(myHand, upCard);
         
