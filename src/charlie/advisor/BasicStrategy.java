@@ -168,6 +168,10 @@ public class BasicStrategy implements IAdvisor {
         }
         Play play = plays.get(index);
         return play;
-    }    
+    }
+    
+    protected Play getPlay(Hand myHand, Card upCard) {
+        return advise(myHand, upCard);
+    }
 }
 
