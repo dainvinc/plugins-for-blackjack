@@ -35,7 +35,7 @@ public class Test00_12_2 {
         Card upCard = new Card(2,Card.Suit.HEARTS);
         
         // Construct advisor and test it
-        IAdvisor advisor = new BasicStrategy();
+        IAdvisor advisor = (IAdvisor) new BasicStrategy();
   
         Play advice = advisor.advise(myHand, upCard);
         
