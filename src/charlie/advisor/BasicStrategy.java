@@ -23,24 +23,20 @@ import java.util.HashMap;
 
 /**
  * Prototype advisor which uses human input as advice.
- * @author Ron Coleman
+ * @author Vishal
  */
 public class BasicStrategy implements IAdvisor { 
     public final static Play H = Play.HIT;
     public final static Play S = Play.STAY;
     public final static Play P = Play.SPLIT;
     public final static Play D = Play.DOUBLE_DOWN;
-    private Hand myHand;
-    private Card upCard;
     public final static HashMap<String,ArrayList<Play>> SECTION1 = new HashMap<>();
     public final static HashMap<String,ArrayList<Play>> SECTION2 = new HashMap<>();
     public final static HashMap<String,ArrayList<Play>> SECTION3 = new HashMap<>();
     public final static HashMap<String,ArrayList<Play>> SECTION4 = new HashMap<>();
     static {
                                                     // 0 1 2 3 4 5 6 7 8 9: index
-                                                    // 2 3 4 5 6 7 9 9 0 A: rank
-//        SECTION2.put("4",new ArrayList<>(Arrays.asList(H,H,H,P,P,H,H,H,H,H)));                                                        
-//        SECTION2.put("3",new ArrayList<>(Arrays.asList(P,P,P,P,P,P,H,H,H,H)));        
+                                                    // 2 3 4 5 6 7 8 9 0 A: rank        
         SECTION4.put("12",new ArrayList<>(Arrays.asList(H,H,S,S,S,H,H,H,H,H)));
         SECTION4.put("13",new ArrayList<>(Arrays.asList(S,S,S,S,S,H,H,H,H,H)));
         SECTION4.put("14",new ArrayList<>(Arrays.asList(S,S,S,S,S,H,H,H,H,H)));
@@ -50,7 +46,6 @@ public class BasicStrategy implements IAdvisor {
         SECTION4.put("18",new ArrayList<>(Arrays.asList(S,S,S,S,S,S,S,S,S,S)));
         SECTION4.put("19",new ArrayList<>(Arrays.asList(S,S,S,S,S,S,S,S,S,S)));
         SECTION4.put("20",new ArrayList<>(Arrays.asList(S,S,S,S,S,S,S,S,S,S)));
-//        SECTION4.put("21",new ArrayList<>(Arrays.asList(S,S,S,S,S,S,S,S,S,S)));
         
         SECTION3.put("5",new ArrayList<>(Arrays.asList(H,H,H,H,H,H,H,H,H,H)));
         SECTION3.put("6",new ArrayList<>(Arrays.asList(H,H,H,H,H,H,H,H,H,H)));
@@ -93,12 +88,6 @@ public class BasicStrategy implements IAdvisor {
      * Constructor
      */
     public BasicStrategy() {
-        //NOTES
-        //if(!isValid(myHand) || !isValid(upCard))
-        //Create class BasicStrategy
-        //return bs.getPlay(myHand, upCard) -- contains in *Advisor.java
-        //all the code goes into BasicStrategy
-     
         // This used to get input from the player
         this.br = new BufferedReader(new InputStreamReader(System.in));
         
@@ -109,10 +98,6 @@ public class BasicStrategy implements IAdvisor {
         this.plays.put("P", Play.SPLIT);
     }
     
-    public BasicStrategy(Hand myHand, Card upCard) {
-        this.myHand = myHand;
-        this.upCard = upCard;
-    }
     /**
      * Gives advice.
      * @param myHand Player's hand
@@ -155,11 +140,8 @@ public class BasicStrategy implements IAdvisor {
     } 
     
     protected Play doSection3(Hand myHand, Card upCard) {
-        System.out.println("Section 3 - *************** ");
         String rank = myHand.getValue() + "";
-        System.out.println("Rank - *************** " +rank);
         ArrayList<Play> plays = SECTION3.get(rank);
-        System.out.println("Card - *************** " +plays);
         int index;
         if(upCard.isFace() || (upCard.getRank() == 10)) {
             index = 8;
@@ -168,18 +150,13 @@ public class BasicStrategy implements IAdvisor {
         } else {
             index = upCard.getRank() - 2;
         }
-        System.out.println("Index - *************** " +index +"** : "+upCard.getRank());
         Play play = plays.get(index);
-        System.out.println("play - ***********v**** " +play);
         return play;
     }
     
     protected Play doSection4(Hand myHand, Card upCard) {
-        System.out.println("Section 4 *************** ");
         String rank = myHand.getValue() + "";
-        System.out.println("Plays - *************** " +rank);
         ArrayList<Play> plays = SECTION4.get(rank);
-        System.out.println("Plays - *************** " +plays);
 //        int index = upCard.isFace() ? 8 : upCard.getRank() - 2;
         int index;
         if(upCard.isFace() || (upCard.getRank() == 10)) {
@@ -189,14 +166,8 @@ public class BasicStrategy implements IAdvisor {
         } else {
             index = upCard.getRank() - 2;
         }
-        System.out.println("Plays - *************** " +index);
         Play play = plays.get(index);
-        System.out.println("Plays - *************** " +play);
         return play;
     }    
-
-    protected Play getPlay() {
-        return advise(myHand, upCard);
-    }
 }
 
