@@ -3,3 +3,4 @@ charlie.server.topology.port 1234
 charlie.server.login.port 9000
 charlie.debug true
 charlie.shoe charlie.card.Shoe01
+charlie.advisor charlie.advisor.BasicStrategy
